@@ -108,6 +108,9 @@ if exist %folder%\values.csv (
             if %%x equ global_vars (
                 set "volumes=-v %folder%\%%x:%httpd_dir%/variables/global.vars:ro !volumes!"
             )
+            if %%x equ wknd_rewrite_rules (
+                set "volumes=-v %folder%\%%x:%httpd_dir%/rewrites/wknd_rewrite.rules:ro !volumes!"
+            )
             if %%x equ rewrite_rules (
                 set "volumes=-v %folder%\%%x:%httpd_dir%/rewrites/rewrite.rules:ro !volumes!"
             )

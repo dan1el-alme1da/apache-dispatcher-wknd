@@ -126,7 +126,7 @@ Include conf.d/variables/custom.vars
 	</IfModule>
 	<IfModule mod_rewrite.c>
 		RewriteEngine	on
-		Include conf.d/rewrites/rewrite.rules
+		Include conf.d/rewrites/wknd_rewrite.rules
 	</IfModule>
     ErrorDocument 404 ${404_PAGE}
     ErrorDocument 500 ${500_PAGE}
