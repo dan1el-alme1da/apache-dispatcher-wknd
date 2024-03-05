@@ -1,5 +1,5 @@
-./dispatcher/src/conf.d/enabled_vhosts/
-./dispatcher/src/conf.dispatcher.d/enabled_farms/
-./dispatcher/out
-./dispatcher/cache
-./dispatcher/target
+dispatcher/src/conf.d/enabled_vhosts/
+dispatcher/src/conf.dispatcher.d/enabled_farms/
+dispatcher/out
+dispatcher/cache
+dispatcher/target
