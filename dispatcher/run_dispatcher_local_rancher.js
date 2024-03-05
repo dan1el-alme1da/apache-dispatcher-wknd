@@ -31,22 +31,35 @@ const updateValuesCsv = () => {
     fs.writeFileSync('./out/values.csv', valuesCsv);
 };
 
+const isLinux = process.platform == 'linux';
+console.log({isLinux});
+var VALIDATOR_FOLDER_PATH = './dispatcher_tools_2_0_190_windows/bin/validator'
+var BIN_FOLDER_PATH = './dispatcher_tools_2_0_190_windows/bin'
+var validatorPath = ''
+var dispatcherToolsBinFolder = ''
+if(isLinux){
+    validatorPath = path.resolve('./dispatcher_tools_2_0_190_unix/bin/validator');
+    dispatcherToolsBinFolder = path.resolve('./dispatcher_tools_2_0_190_unix/bin');
+}else{
+    validatorPath = path.resolve(VALIDATOR_FOLDER_PATH);
+    dispatcherToolsBinFolder = path.resolve(BIN_FOLDER_PATH);
+}
+
 // 0. Check env
-const validatorPath = path.resolve('./dispatcher-tools/bin/validator');
-const dispatcherToolsBinFolder = path.resolve('./dispatcher-tools/bin');
+//const validatorPath = path.resolve('./dispatcher-tools/bin/validator');
+//const dispatcherToolsBinFolder = path.resolve('./dispatcher-tools/bin');
 var aemHost = process.env.DISPATCHER_TOOLS_AEMHOST;
 var port = process.env.DISPATCHER_TOOLS_PORT;
 if (!dispatcherToolsBinFolder) {
     console.log('**ERROR** Check environment variables, for example:');
     console.log('DISPATCHER_TOOLS_BIN_FOLDER=/aem-sdk/dispatcher/bin');
     console.log('DISPATCHER_TOOLS_AEMHOST=host.docker.internal:4503');
-    console.log('DISPATCHER_TOOLS_PORT=8080');
+    console.log('DISPATCHER_TOOLS_PORT=80');
     process.exit(1);
 }
 if (!aemHost) aemHost = 'host.docker.internal:4503';
-if (!port) port = '8080';
-const isLinux = process.platform == 'linux';
-console.log({isLinux});
+if (!port) port = '80';
+
 
 // 1. limpa diretório
 exec(isLinux ? `rm -rf out` : `del out /F /Q`);

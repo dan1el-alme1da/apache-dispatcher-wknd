@@ -76,7 +76,7 @@ if %ERRORLEVEL% neq 0 (
 )
 
 rem Process files in deploymentfolder and generate volume argument
-set volumes=
+set volumes=-v %folder%\..\cache:/mnt/var/www
 set config_dir=/etc/httpd
 set customer_dir_mount=/mnt/dev/src
 set httpd_dir=%config_dir%/conf.d
