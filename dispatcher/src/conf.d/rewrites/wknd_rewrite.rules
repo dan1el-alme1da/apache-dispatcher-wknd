@@ -1,0 +1,35 @@
+http://wknd.local.com.br/us/en -> http://wknd.local.com.br:4503/content/wknd/us/en.html
+
+http://wknd.local.com.br = domanio
+%{REQUEST_URI} = /us/en
+                 /us/en/ 
+                 /us/en.html   
+
+# regra 1: 
+RewriteCond %{REQUEST_URI} !(.webp|.jpe?g|.png|.svg|.xml|.model.json)$
+RewriteCond %{REQUEST_URI} !^/(apps|bin|conf|etc|libs|system|temp|var)$
+RewriteCond %{REQUEST_URI} ^/(us/en|/us/en.html|/content/wknd/us/en|)$ 
+RewriteRule ^/(us/en|/us/en.html|content/wknd/us/en|content/wknd/us/en.html)$ /content/wknd/us/en.html [PT,L,QSA,NC]
+
+
+# regra 2: remove a pasta (/content/wknd/) === /content/wknd/us/en.html para /us/en.html
+RewriteCond %{REQUEST_URI} !(.webp|.jpe?g|.png|.svg|.xml|.model.json)$
+RewriteCond %{REQUEST_URI} !^/(apps|bin|conf|etc|libs|system|temp|var)$
+RewriteCond %{REQUEST_URI} !^/(us/en)(.*)$
+#RewriteCond %{REQUEST_URI} !^/content/wknd/us/en/(.*)$
+RewriteCond %{REQUEST_URI} ^/(content/wknd/us/en)(.*)$
+RewriteRule ^/content/wknd/(.*)$ $1 [NE,NC,L,R=301] 
+
+
+
+# regra 3: vai tirar o html ou a barra  /us/en.html  -> /us/en
+RewriteCond %{REQUEST_URI} !(.webp|.jpe?g|.png|.svg|.xml|.model.json)$
+RewriteCond %{REQUEST_URI} !^/(apps|bin|content|conf|etc|libs|system|temp|var)$
+RewriteCond %{REQUEST_URI} ^(.*)(.html|/|)$
+RewriteRule ^(.*)(.html|/)$ $1 [R=302,NC,L,QSA]
+
+# regra 4:  /us/en    -> /content/wknd/us/en.html
+RewriteCond %{REQUEST_URI} !^/(apps|bin|content|conf|etc|libs|system|temp|var)
+RewriteCond %{REQUEST_URI} !(.html|.webp|.jpe?g|.png|.svg|.xml|.model.json)$
+RewriteCond %{REQUEST_URI} ^/us/en(.*)$
+RewriteRule ^/(.*)$ /content/wknd/$1.html [PT,L,QSA,NC] 

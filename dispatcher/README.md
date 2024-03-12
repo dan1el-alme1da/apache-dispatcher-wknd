@@ -193,6 +193,7 @@ set DISPATCHER_TOOLS_BIN_FOLDER=/aem-sdk/dispatcher/bin
 set DISPATCHER_TOOLS_AEMHOST=host.docker.internal:4503
 set DISPATCHER_TOOLS_PORT=80
 ```
+set DISPATCHER_TOOLS_AEMHOST= 192.168.100.38:4503
 
 **powershell** windows:
 ```
@@ -215,6 +216,12 @@ export DISPATCHER_TOOLS_AEMHOST=host.docker.internal:4503
  export DISPATCHER_TOOLS_AEMHOST=192.168.100.38:4503
 export DISPATCHER_TOOLS_PORT=80
 ```
+
+Comandos do linux
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo systemctl restart docker
+
 
 ## Troubleshooting
 **Problema**. Ao executar no WSL, o erro abaixo foi encontrado em algumas situações:

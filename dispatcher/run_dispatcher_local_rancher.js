@@ -34,12 +34,12 @@ const updateValuesCsv = () => {
 const isLinux = process.platform == 'linux';
 console.log({isLinux});
 var VALIDATOR_FOLDER_PATH = './dispatcher_tools_2_0_190_windows/bin/validator'
-var BIN_FOLDER_PATH = './dispatcher_tools_2_0_190_windows/bin'
+var BIN_FOLDER_PATH = './dispatcher_tools_2_0_190_windows/bin/docker_run.cmd'
 var validatorPath = ''
 var dispatcherToolsBinFolder = ''
 if(isLinux){
     validatorPath = path.resolve('./dispatcher_tools_2_0_190_unix/bin/validator');
-    dispatcherToolsBinFolder = path.resolve('./dispatcher_tools_2_0_190_unix/bin');
+    dispatcherToolsBinFolder = path.resolve('./dispatcher_tools_2_0_190_unix/bin/docker_run.sh');
 }else{
     validatorPath = path.resolve(VALIDATOR_FOLDER_PATH);
     dispatcherToolsBinFolder = path.resolve(BIN_FOLDER_PATH);
@@ -75,7 +75,5 @@ updateValuesCsv();
 
 // 5. executa o docker do dispatcher tools
 exec(
-    `${dispatcherToolsBinFolder}/docker_run.${
-        isLinux ? 'sh' : 'cmd'
-    } out ${aemHost} ${port}`,
+    `${dispatcherToolsBinFolder} out ${aemHost} ${port}`,
 );
